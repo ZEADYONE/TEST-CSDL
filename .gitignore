@@ -1,0 +1,14 @@
+.env
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+models/*.joblib
+models/distance_stats.json
+app/static/dataset/*.png
+app/static/queries/*/
+debug_outputs/*/
+!models/.gitkeep
+!app/static/dataset/.gitkeep
+!app/static/queries/.gitkeep
+!debug_outputs/.gitkeep

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bird Image Retrieval</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">HAND-CRAFTED CBIR · FEATURE VERSION V1</p>
+        <h1>Bird Image Retrieval</h1>
+        <p class="lead">Tìm những ảnh chim tương tự bằng màu sắc, kết cấu và hình dạng — không dùng deep embedding.</p>
+      </div>
+      <div class="stats" aria-label="Thống kê dữ liệu">
+        <span><strong>{{ stats.total_images }}</strong> ảnh</span>
+        <span><strong>{{ stats.species_count }}</strong> loài</span>
+        <span><strong>2411</strong> đặc trưng</span>
+      </div>
+    </header>
+
+    {% if error %}<div class="alert">{{ error }}</div>{% endif %}
+
+    <section class="upload-panel">
+      <form action="/search" method="post" enctype="multipart/form-data">
+        <label class="drop-zone" for="image-input">
+          <input id="image-input" type="file" name="image" accept="image/*" required>
+          <img id="preview" alt="Xem trước ảnh truy vấn" hidden>
+          <span id="upload-copy">
+            <b>Chọn ảnh chim</b>
+            <small>PNG, JPG hoặc WebP · tối đa 15 MB</small>
+          </span>
+        </label>
+
+        <div class="options">
+          <label>Top K
+            <select name="top_k">
+              <option value="5">5</option>
+              <option value="10" selected>10</option>
+              <option value="20">20</option>
+            </select>
+          </label>
+          <label class="check"><input type="checkbox" name="flip_horizontal" value="true"> Lật ngang ảnh query</label>
+        </div>
+        <button type="submit">Tìm ảnh chim tương tự <span>→</span></button>
+      </form>
+    </section>
+
+    <section class="method">
+      <article><span>01</span><h2>Color–Spatial</h2><p>Joint HSV toàn cục và ba vùng trái–giữa–phải.</p></article>
+      <article><span>02</span><h2>Texture</h2><p>LBP đa tỉ lệ và GLCM chỉ trong vùng chim.</p></article>
+      <article><span>03</span><h2>Robust Shape</h2><p>Silhouette 8×8 và năm đại lượng hình học.</p></article>
+    </section>
+  </main>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

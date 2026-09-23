@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kết quả · Bird Image Retrieval</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <main class="shell results-page">
+    <nav><a href="/">← Truy vấn ảnh khác</a><span>Bird Image Retrieval</span></nav>
+    <header class="result-header">
+      <div>
+        <p class="eyebrow">SEARCH RESULTS</p>
+        <h1>Những ảnh tương tự nhất</h1>
+      </div>
+      <div class="quality"><span>Mask quality</span><strong>{{ '%.0f'|format(search.mask_quality * 100) }}%</strong></div>
+    </header>
+
+    <section class="query-strip">
+      <figure><img src="{{ search.query_original_url }}" alt="Ảnh gốc"><figcaption>Ảnh gốc</figcaption></figure>
+      <figure><img src="{{ search.query_processed_url }}" alt="Ảnh sau xử lý"><figcaption>Sau tiền xử lý</figcaption></figure>
+      <figure><img src="{{ search.query_mask_url }}" alt="Mask"><figcaption>Binary mask</figcaption></figure>
+      {% if search.debug %}
+      <div class="debug-box"><b>Effective weights</b><span>Color {{ '%.2f'|format(search.debug.effective_weights.color) }}</span><span>Texture {{ '%.2f'|format(search.debug.effective_weights.texture) }}</span><span>Shape {{ '%.2f'|format(search.debug.effective_weights.shape) }}</span></div>
+      {% endif %}
+    </section>
+
+    <section class="result-grid">
+      {% for item in search.results %}
+      <article class="result-card">
+        <div class="rank">#{{ loop.index }}</div>
+        <img src="{{ item.image_url }}" alt="{{ item.file_name }}" loading="lazy">
+        <div class="card-body">
+          <p class="species">{{ item.species or 'Không có nhãn' }}</p>
+          <h2 title="{{ item.file_name }}">{{ item.file_name }}</h2>
+          <div class="overall"><span>Overall</span><strong>{{ '%.1f'|format(item.similarity * 100) }}%</strong></div>
+          <div class="score"><span>Color</span><progress max="1" value="{{ item.color_similarity }}"></progress><b>{{ '%.1f'|format(item.color_similarity * 100) }}%</b></div>
+          <div class="score"><span>Texture</span><progress max="1" value="{{ item.texture_similarity }}"></progress><b>{{ '%.1f'|format(item.texture_similarity * 100) }}%</b></div>
+          <div class="score"><span>Shape</span><progress max="1" value="{{ item.shape_similarity }}"></progress><b>{{ '%.1f'|format(item.shape_similarity * 100) }}%</b></div>
+        </div>
+      </article>
+      {% endfor %}
+    </section>
+  </main>
+</body>
+</html>
