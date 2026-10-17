@@ -1,4 +1,9 @@
-"""Robust 69-dimensional silhouette and geometric shape descriptor."""
+"""BBox-normalized 64-dimensional silhouette descriptor.
+
+The five legacy geometry scalars remain as private experiment helpers so old
+ablation scripts stay reproducible, but production feature extraction no
+longer stores or scores them.
+"""
 
 from __future__ import annotations
 
@@ -11,12 +16,30 @@ from app.services.preprocessing import mask_bbox
 GRID_SIZE = 8
 SILHOUETTE_DIM = GRID_SIZE * GRID_SIZE
 SHAPE_SCALAR_DIM = 5
-SHAPE_DIM = SILHOUETTE_DIM + SHAPE_SCALAR_DIM
+SHAPE_DIM = SILHOUETTE_DIM
+
+
+def _bbox_normalized_mask(mask: np.ndarray, size: int = 128) -> np.ndarray:
+    """Crop the silhouette, preserve aspect ratio, and center it on a square."""
+
+    binary = np.asarray(mask, dtype=np.uint8)
+    bbox = mask_bbox(binary)
+    if bbox is None:
+        raise ValueError("Shape extraction requires a non-empty mask")
+    x1, y1, x2, y2 = bbox
+    crop = binary[y1:y2, x1:x2]
+    side = max(crop.shape)
+    canvas = np.zeros((side, side), dtype=np.uint8)
+    offset_y = (side - crop.shape[0]) // 2
+    offset_x = (side - crop.shape[1]) // 2
+    canvas[offset_y : offset_y + crop.shape[0], offset_x : offset_x + crop.shape[1]] = crop
+    return cv2.resize(canvas, (size, size), interpolation=cv2.INTER_AREA) >= 0.5
 
 
 def _silhouette_grid(mask: np.ndarray) -> np.ndarray:
+    normalized = _bbox_normalized_mask(mask)
     cells: list[float] = []
-    for rows in np.array_split(mask, GRID_SIZE, axis=0):
+    for rows in np.array_split(normalized, GRID_SIZE, axis=0):
         for cell in np.array_split(rows, GRID_SIZE, axis=1):
             cells.append(float(np.mean(cell)) if cell.size else 0.0)
     return np.asarray(cells, dtype=np.float32)
@@ -58,12 +81,12 @@ def _shape_scalars(mask: np.ndarray) -> np.ndarray:
 
 
 def extract_shape_features(mask: np.ndarray) -> np.ndarray:
-    """Extract an 8x8 occupancy grid followed by five geometry scalars."""
+    """Extract a bbox-normalized 8x8 silhouette occupancy grid."""
 
     binary = np.asarray(mask, dtype=bool)
     if binary.ndim != 2 or not np.any(binary):
         raise ValueError("Shape extraction requires a non-empty 2D mask")
-    vector = np.concatenate((_silhouette_grid(binary), _shape_scalars(binary))).astype(np.float32)
+    vector = _silhouette_grid(binary).astype(np.float32)
     if vector.shape != (SHAPE_DIM,):
         raise AssertionError(f"Expected {SHAPE_DIM} shape features, got {vector.shape}")
     return np.nan_to_num(vector, nan=0.0, posinf=0.0, neginf=0.0)

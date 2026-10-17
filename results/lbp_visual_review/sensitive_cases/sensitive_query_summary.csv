@@ -1,0 +1,7 @@
+﻿case_number,query_source_id,transformation,top10_overlap_count,config_rbo10,changed_positions
+1,1045,translate_5px,9,0.9430329511,3
+2,767,gaussian_blur,9,0.9514164511000001,3
+3,987,brightness_plus_10,9,0.9514164511000001,3
+4,1395,brightness_plus_10,9,0.9514164511000001,3
+5,1005,brightness_plus_10,9,0.9536659368142857,3
+6,11,brightness_minus_10,9,0.9564749821,2

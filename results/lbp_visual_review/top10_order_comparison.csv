@@ -1,0 +1,7 @@
+﻿query_number,query_source_id,transformation,same_top10_order,top10_overlap_count
+1,109,mask_erode,True,10
+2,11,brightness_plus_10,True,10
+3,55,brightness_minus_10,True,10
+4,62,gaussian_blur,True,10
+5,89,translate_5px,True,10
+6,95,scale_plus_5pct,True,10

@@ -1,0 +1,13 @@
+case,query_source_id,transform,configuration,result_id,texture_score_1_5,overall_score_1_5,preferred,visual_note
+1,1045,translate,Current Full,652,2,2,no,"Ngực sọc đậm và màu nhạt, khác bề mặt lông trơn màu ô-liu/vàng của ảnh truy vấn"
+1,1045,translate,Current Full - LBP,908,4,4,yes,"Màu ô-liu/vàng và bề mặt lông trơn gần ảnh truy vấn hơn"
+2,767,blur,Current Full,990,3,3,yes,"Thân chim nhỏ, lông tương đối trơn và tông nâu-xám còn gần truy vấn"
+2,767,blur,Current Full - LBP,24,1,1,no,"Vịt có hoa văn đốm và hình dáng rất khác chim nhỏ đuôi dài trong truy vấn"
+3,987,brightness+10,Current Full,682,2,2,no,"Hoa văn nâu-trắng tương phản, khác bộ lông xám nhạt tương đối trơn của truy vấn"
+3,987,brightness+10,Current Full - LBP,1343,4,4,yes,"Thân tròn nhỏ, mảng xám-trắng và độ mịn bộ lông gần truy vấn hơn"
+4,1395,brightness+10,Current Full,1316,1,1,no,"Chim ruồi màu hồng, không có mảng mặt-họng đen trắng đặc trưng của truy vấn"
+4,1395,brightness+10,Current Full - LBP,1399,4,4,yes,"Có mảng mặt-họng tương phản và thân nâu gần cấu trúc thị giác của truy vấn"
+5,1005,brightness+10,Current Full,365,2,1,no,"Chim chân dài màu gỉ-trắng, hình dáng và phân bố vân khác rõ truy vấn"
+5,1005,brightness+10,Current Full - LBP,338,3,2,yes,"Hình dáng vẫn khác nhưng vân nâu ở phần lưng gần ảnh truy vấn hơn phương án Full"
+6,11,brightness-10,Current Full,333,1,1,no,"Chim nhỏ nâu đốm, khác hoàn toàn bộ lông trắng trơn của ngỗng truy vấn"
+6,11,brightness-10,Current Full - LBP,224,4,3,yes,"Bộ lông trắng trơn và màu tổng thể gần truy vấn; mỏ và chân vẫn khác"

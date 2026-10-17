@@ -11,7 +11,7 @@ import numpy as np
 from app.config import Settings, get_settings
 from app.services.color_features import JOINT_DIM, SPATIAL_REGION_DIM, SPATIAL_REGIONS
 from app.services.feature_extractor import FeatureBundle
-from app.services.shape_features import SHAPE_DIM as GEOMETRY_DIM, SILHOUETTE_DIM
+from app.services.shape_features import SILHOUETTE_DIM
 from app.services.texture_features import LBP_DIM, TEXTURE_DIM as BASE_TEXTURE_DIM
 
 
@@ -125,14 +125,9 @@ def component_distances(
     silhouette = euclidean_distance(
         query.shape[:SILHOUETTE_DIM], candidate.shape[:SILHOUETTE_DIM]
     )
-    scalars = euclidean_distance(
-        query.shape[SILHOUETTE_DIM:GEOMETRY_DIM],
-        candidate.shape[SILHOUETTE_DIM:GEOMETRY_DIM],
-    )
-    hog = euclidean_distance(query.shape[GEOMETRY_DIM:], candidate.shape[GEOMETRY_DIM:])
+    hog = euclidean_distance(query.shape[SILHOUETTE_DIM:], candidate.shape[SILHOUETTE_DIM:])
     shape = (
         config.shape_silhouette_weight * silhouette
-        + config.shape_scalar_weight * scalars
         + config.shape_hog_weight * hog
     )
     return GroupDistances(float(color), float(texture), float(shape))

@@ -14,6 +14,8 @@ from app.config import get_settings
 from app.database import get_db
 from app.models import ImageFeature, ImageRecord
 from app.schemas.search import SearchResponse
+from app.services.color_features import COLOR_DIM
+from app.services.feature_extractor import SHAPE_DIM, TEXTURE_DIM
 from app.services.search_service import search_similar_images
 
 
@@ -93,5 +95,5 @@ def stats(session: Session = Depends(get_db)) -> dict[str, object]:
         "total_images": total,
         "species_count": species_count,
         "feature_version": settings.feature_version,
-        "dimensions": {"color": 176, "texture": 38, "shape": 69},
+        "dimensions": {"color": COLOR_DIM, "texture": TEXTURE_DIM, "shape": SHAPE_DIM},
     }

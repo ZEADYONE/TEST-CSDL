@@ -1,3 +1,4 @@
+import cv2
 import numpy as np
 
 from app.services.feature_extractor import BirdFeatureExtractor, SHAPE_DIM
@@ -8,13 +9,25 @@ from app.services.shape_features import extract_shape_features
 def test_shape_dimensions_and_grid_range(bird_sample):
     _, mask = bird_sample
     vector = extract_shape_features(mask)
-    assert vector.shape == (69,)
+    assert vector.shape == (64,)
     assert np.all(np.isfinite(vector))
-    assert np.all((vector[:64] >= 0.0) & (vector[:64] <= 1.0))
+    assert np.all((vector >= 0.0) & (vector <= 1.0))
 
 
 def test_combined_shape_vector_includes_hog(bird_sample):
     image, mask = bird_sample
     vector = BirdFeatureExtractor().extract(image, mask).shape
-    assert vector.shape == (69 + HOG_DIM,)
+    assert vector.shape == (64 + HOG_DIM,)
     assert vector.shape == (SHAPE_DIM,)
+
+
+def test_bbox_silhouette_is_translation_invariant(bird_sample):
+    _, mask = bird_sample
+    matrix = np.float32([[1, 0, -24], [0, 1, 19]])
+    shifted = cv2.warpAffine(
+        mask.astype(np.uint8),
+        matrix,
+        (mask.shape[1], mask.shape[0]),
+        flags=cv2.INTER_NEAREST,
+    ).astype(bool)
+    assert np.allclose(extract_shape_features(mask), extract_shape_features(shifted))

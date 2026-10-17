@@ -1,0 +1,832 @@
+{
+  "protocol": {
+    "seed": 42,
+    "gallery": 1468,
+    "sampled_originals": 300,
+    "selection_originals": 150,
+    "test_originals": 150,
+    "queries": 2100,
+    "uses_species": false
+  },
+  "results": {
+    "Full": {
+      "configuration": "Full",
+      "category": "baseline",
+      "dimensions": 2411,
+      "components": "global_hsv,spatial_hsv,lbp,glcm,gabor,silhouette,scalar,hog",
+      "selection": {
+        "hit1": 0.9990476190476191,
+        "hit5": 1.0,
+        "mrr": 0.9995238095238095,
+        "mean_rank": 1.000952380952381,
+        "mean_target_distance": 0.09305036067962646
+      },
+      "test": {
+        "hit1": 0.9990476190476191,
+        "hit5": 1.0,
+        "mrr": 0.9995238095238095,
+        "mean_rank": 1.000952380952381,
+        "mean_target_distance": 0.09287180751562119
+      },
+      "extraction_ms": 151.7902269084672,
+      "retrieval_ms": 10.34354447586728,
+      "total_latency_ms": 162.13377138433447,
+      "p95": {
+        "color": 0.8932904005050659,
+        "texture": 9.745675086975098,
+        "shape": 6.61055850982666
+      }
+    },
+    "Full - global_hsv": {
+      "configuration": "Full - global_hsv",
+      "category": "leave_one_out",
+      "dimensions": 2123,
+      "components": "spatial_hsv,lbp,glcm,gabor,silhouette,scalar,hog",
+      "selection": {
+        "hit1": 0.9990476190476191,
+        "hit5": 1.0,
+        "mrr": 0.9995238095238095,
+        "mean_rank": 1.000952380952381,
+        "mean_target_distance": 0.09274415671825409
+      },
+      "test": {
+        "hit1": 0.9990476190476191,
+        "hit5": 1.0,
+        "mrr": 0.9995238095238095,
+        "mean_rank": 1.000952380952381,
+        "mean_target_distance": 0.09256047755479813
+      },
+      "extraction_ms": 146.4766604792593,
+      "retrieval_ms": 6.095274237782828,
+      "total_latency_ms": 152.57193471704213,
+      "p95": {
+        "color": 0.8848211765289307,
+        "texture": 9.745675086975098,
+        "shape": 6.61055850982666
+      }
+    },
+    "Full - spatial_hsv": {
+      "configuration": "Full - spatial_hsv",
+      "category": "leave_one_out",
+      "dimensions": 2195,
+      "components": "global_hsv,lbp,glcm,gabor,silhouette,scalar,hog",
+      "selection": {
+        "hit1": 0.9990476190476191,
+        "hit5": 1.0,
+        "mrr": 0.9995238095238095,
+        "mean_rank": 1.000952380952381,
+        "mean_target_distance": 0.09370183944702148
+      },
+      "test": {
+        "hit1": 0.9990476190476191,
+        "hit5": 1.0,
+        "mrr": 0.9995238095238095,
+        "mean_rank": 1.000952380952381,
+        "mean_target_distance": 0.09353355318307877
+      },
+      "extraction_ms": 144.26114433422862,
+      "retrieval_ms": 7.110269428341693,
+      "total_latency_ms": 151.3714137625703,
+      "p95": {
+        "color": 0.9220520257949829,
+        "texture": 9.745675086975098,
+        "shape": 6.61055850982666
+      }
+    },
+    "Full - lbp": {
+      "configuration": "Full - lbp",
+      "category": "leave_one_out",
+      "dimensions": 2383,
+      "components": "global_hsv,spatial_hsv,glcm,gabor,silhouette,scalar,hog",
+      "selection": {
+        "hit1": 0.9990476190476191,
+        "hit5": 1.0,
+        "mrr": 0.9995238095238095,
+        "mean_rank": 1.000952380952381,
+        "mean_target_distance": 0.09296657145023346
+      },
+      "test": {
+        "hit1": 0.9990476190476191,
+        "hit5": 1.0,
+        "mrr": 0.9995238095238095,
+        "mean_rank": 1.000952380952381,
+        "mean_target_distance": 0.09278661757707596
+      },
+      "extraction_ms": 54.56237043187554,
+      "retrieval_ms": 9.904733666529259,
+      "total_latency_ms": 64.4671040984048,
+      "p95": {
+        "color": 0.8932904005050659,
+        "texture": 10.821836471557617,
+        "shape": 6.61055850982666
+      }
+    },
+    "Full - glcm": {
+      "configuration": "Full - glcm",
+      "category": "leave_one_out",
+      "dimensions": 2401,
+      "components": "global_hsv,spatial_hsv,lbp,gabor,silhouette,scalar,hog",
+      "selection": {
+        "hit1": 0.9990476190476191,
+        "hit5": 1.0,
+        "mrr": 0.9995238095238095,
+        "mean_rank": 1.000952380952381,
+        "mean_target_distance": 0.08790843933820724
+      },
+      "test": {
+        "hit1": 1.0,
+        "hit5": 1.0,
+        "mrr": 1.0,
+        "mean_rank": 1.0,
+        "mean_target_distance": 0.0871216356754303
+      },
+      "extraction_ms": 142.3614649096548,
+      "retrieval_ms": 10.319486428384801,
+      "total_latency_ms": 152.68095133803962,
+      "p95": {
+        "color": 0.8932904005050659,
+        "texture": 11.709678649902344,
+        "shape": 6.61055850982666
+      }
+    },
+    "Full - gabor": {
+      "configuration": "Full - gabor",
+      "category": "leave_one_out",
+      "dimensions": 2375,
+      "components": "global_hsv,spatial_hsv,lbp,glcm,silhouette,scalar,hog",
+      "selection": {
+        "hit1": 0.9980952380952381,
+        "hit5": 1.0,
+        "mrr": 0.9990476190476191,
+        "mean_rank": 1.0019047619047619,
+        "mean_target_distance": 0.10246925801038742
+      },
+      "test": {
+        "hit1": 0.9952380952380953,
+        "hit5": 0.9980952380952381,
+        "mrr": 0.9966560846560846,
+        "mean_rank": 1.0285714285714285,
+        "mean_target_distance": 0.10438794642686844
+      },
+      "extraction_ms": 129.67528157313134,
+      "retrieval_ms": 10.318800952130308,
+      "total_latency_ms": 139.99408252526166,
+      "p95": {
+        "color": 0.8932904005050659,
+        "texture": 5.951282024383545,
+        "shape": 6.61055850982666
+      }
+    },
+    "Full - silhouette": {
+      "configuration": "Full - silhouette",
+      "category": "leave_one_out",
+      "dimensions": 2347,
+      "components": "global_hsv,spatial_hsv,lbp,glcm,gabor,scalar,hog",
+      "selection": {
+        "hit1": 0.9990476190476191,
+        "hit5": 1.0,
+        "mrr": 0.9995238095238095,
+        "mean_rank": 1.000952380952381,
+        "mean_target_distance": 0.09305036067962646
+      },
+      "test": {
+        "hit1": 0.9990476190476191,
+        "hit5": 1.0,
+        "mrr": 0.9995238095238095,
+        "mean_rank": 1.000952380952381,
+        "mean_target_distance": 0.09287180751562119
+      },
+      "extraction_ms": 150.11668295632782,
+      "retrieval_ms": 10.233601999713018,
+      "total_latency_ms": 160.35028495604084,
+      "p95": {
+        "color": 0.8932904005050659,
+        "texture": 9.745675086975098,
+        "shape": 6.61055850982666
+      }
+    },
+    "Full - scalar": {
+      "configuration": "Full - scalar",
+      "category": "leave_one_out",
+      "dimensions": 2406,
+      "components": "global_hsv,spatial_hsv,lbp,glcm,gabor,silhouette,hog",
+      "selection": {
+        "hit1": 0.9990476190476191,
+        "hit5": 1.0,
+        "mrr": 0.9995238095238095,
+        "mean_rank": 1.000952380952381,
+        "mean_target_distance": 0.10099845379590988
+      },
+      "test": {
+        "hit1": 0.9990476190476191,
+        "hit5": 1.0,
+        "mrr": 0.9995238095238095,
+        "mean_rank": 1.000952380952381,
+        "mean_target_distance": 0.10076349228620529
+      },
+      "extraction_ms": 147.57460762258796,
+      "retrieval_ms": 10.368190428264262,
+      "total_latency_ms": 157.94279805085222,
+      "p95": {
+        "color": 0.8932904005050659,
+        "texture": 9.745675086975098,
+        "shape": 7.197932243347168
+      }
+    },
+    "Full - hog": {
+      "configuration": "Full - hog",
+      "category": "leave_one_out",
+      "dimensions": 647,
+      "components": "global_hsv,spatial_hsv,lbp,glcm,gabor,silhouette,scalar",
+      "selection": {
+        "hit1": 1.0,
+        "hit5": 1.0,
+        "mrr": 1.0,
+        "mean_rank": 1.0,
+        "mean_target_distance": 0.037009887397289276
+      },
+      "test": {
+        "hit1": 0.9990476190476191,
+        "hit5": 1.0,
+        "mrr": 0.9995238095238095,
+        "mean_rank": 1.000952380952381,
+        "mean_target_distance": 0.03715238720178604
+      },
+      "extraction_ms": 147.50337605220489,
+      "retrieval_ms": 8.144891856881301,
+      "total_latency_ms": 155.6482679090862,
+      "p95": {
+        "color": 0.8932904005050659,
+        "texture": 9.745675086975098,
+        "shape": 5.368685722351074
+      }
+    },
+    "global_hsv": {
+      "configuration": "global_hsv",
+      "category": "single",
+      "dimensions": 288,
+      "components": "global_hsv",
+      "selection": {
+        "hit1": 0.9990476190476191,
+        "hit5": 1.0,
+        "mrr": 0.9995238095238095,
+        "mean_rank": 1.000952380952381,
+        "mean_target_distance": 0.013844541274011135
+      },
+      "test": {
+        "hit1": 0.9980952380952381,
+        "hit5": 0.9990476190476191,
+        "mrr": 0.998621553884712,
+        "mean_rank": 1.0180952380952382,
+        "mean_target_distance": 0.014282860793173313
+      },
+      "extraction_ms": 5.3135664292079,
+      "retrieval_ms": 4.257208857175318,
+      "total_latency_ms": 9.570775286383217,
+      "p95": {
+        "color": 0.9220520257949829
+      }
+    },
+    "spatial_hsv": {
+      "configuration": "spatial_hsv",
+      "category": "single",
+      "dimensions": 216,
+      "components": "spatial_hsv",
+      "selection": {
+        "hit1": 0.9980952380952381,
+        "hit5": 1.0,
+        "mrr": 0.9990476190476191,
+        "mean_rank": 1.0019047619047619,
+        "mean_target_distance": 0.010652260854840279
+      },
+      "test": {
+        "hit1": 0.9980952380952381,
+        "hit5": 0.9990476190476191,
+        "mrr": 0.9986507936507938,
+        "mean_rank": 1.0114285714285713,
+        "mean_target_distance": 0.011039267294108868
+      },
+      "extraction_ms": 7.529082574238557,
+      "retrieval_ms": 3.249474809549394,
+      "total_latency_ms": 10.778557383787952,
+      "p95": {
+        "color": 0.8848211765289307
+      }
+    },
+    "lbp": {
+      "configuration": "lbp",
+      "category": "single",
+      "dimensions": 28,
+      "components": "lbp",
+      "selection": {
+        "hit1": 0.7,
+        "hit5": 0.7142857142857143,
+        "mrr": 0.7068034897422909,
+        "mean_rank": 141.3657142857143,
+        "mean_target_distance": 0.12788161635398865
+      },
+      "test": {
+        "hit1": 0.7,
+        "hit5": 0.7161904761904762,
+        "mrr": 0.7090318522681095,
+        "mean_rank": 153.17809523809524,
+        "mean_target_distance": 0.12866245210170746
+      },
+      "extraction_ms": 97.22785647659164,
+      "retrieval_ms": 0.45768290469866424,
+      "total_latency_ms": 97.6855393812903,
+      "p95": {
+        "texture": 0.21906456351280212
+      }
+    },
+    "glcm": {
+      "configuration": "glcm",
+      "category": "single",
+      "dimensions": 10,
+      "components": "glcm",
+      "selection": {
+        "hit1": 0.5257142857142857,
+        "hit5": 0.7180952380952381,
+        "mrr": 0.6116450371573724,
+        "mean_rank": 66.09714285714286,
+        "mean_target_distance": 0.11245028674602509
+      },
+      "test": {
+        "hit1": 0.5466666666666666,
+        "hit5": 0.7247619047619047,
+        "mrr": 0.6234919225301998,
+        "mean_rank": 72.08571428571429,
+        "mean_target_distance": 0.11875970661640167
+      },
+      "extraction_ms": 9.428761998812357,
+      "retrieval_ms": 0.05546671415989597,
+      "total_latency_ms": 9.484228712972254,
+      "p95": {
+        "texture": 7.890279769897461
+      }
+    },
+    "gabor": {
+      "configuration": "gabor",
+      "category": "single",
+      "dimensions": 36,
+      "components": "gabor",
+      "selection": {
+        "hit1": 0.9828571428571429,
+        "hit5": 0.9904761904761905,
+        "mrr": 0.9871421684095852,
+        "mean_rank": 1.3304761904761904,
+        "mean_target_distance": 0.06428360939025879
+      },
+      "test": {
+        "hit1": 0.9933333333333333,
+        "hit5": 0.9980952380952381,
+        "mrr": 0.9957458664977462,
+        "mean_rank": 1.1666666666666667,
+        "mean_target_distance": 0.06154832988977432
+      },
+      "extraction_ms": 22.114945335335854,
+      "retrieval_ms": 0.06952942847939475,
+      "total_latency_ms": 22.18447476381525,
+      "p95": {
+        "texture": 13.645493507385254
+      }
+    },
+    "silhouette": {
+      "configuration": "silhouette",
+      "category": "single",
+      "dimensions": 64,
+      "components": "silhouette",
+      "selection": {
+        "hit1": 0.9990476190476191,
+        "hit5": 1.0,
+        "mrr": 0.9995238095238095,
+        "mean_rank": 1.000952380952381,
+        "mean_target_distance": 0.04428178817033768
+      },
+      "test": {
+        "hit1": 1.0,
+        "hit5": 1.0,
+        "mrr": 1.0,
+        "mean_rank": 1.0,
+        "mean_target_distance": 0.044373705983161926
+      },
+      "extraction_ms": 1.6735439521393605,
+      "retrieval_ms": 0.14728661903756715,
+      "total_latency_ms": 1.8208305711769277,
+      "p95": {
+        "shape": 3.3382298946380615
+      }
+    },
+    "scalar": {
+      "configuration": "scalar",
+      "category": "single",
+      "dimensions": 5,
+      "components": "scalar",
+      "selection": {
+        "hit1": 0.8695238095238095,
+        "hit5": 0.9761904761904762,
+        "mrr": 0.9151237751247719,
+        "mean_rank": 1.4590476190476191,
+        "mean_target_distance": 0.022464273497462273
+      },
+      "test": {
+        "hit1": 0.8809523809523809,
+        "hit5": 0.981904761904762,
+        "mrr": 0.925743861672433,
+        "mean_rank": 1.4752380952380952,
+        "mean_target_distance": 0.023042142391204834
+      },
+      "extraction_ms": 4.215619285879213,
+      "retrieval_ms": 0.03291728573718242,
+      "total_latency_ms": 4.248536571616396,
+      "p95": {
+        "shape": 5.368685722351074
+      }
+    },
+    "hog": {
+      "configuration": "hog",
+      "category": "single",
+      "dimensions": 1764,
+      "components": "hog",
+      "selection": {
+        "hit1": 0.9971428571428571,
+        "hit5": 1.0,
+        "mrr": 0.9985714285714286,
+        "mean_rank": 1.002857142857143,
+        "mean_target_distance": 0.18243567645549774
+      },
+      "test": {
+        "hit1": 0.9980952380952381,
+        "hit5": 1.0,
+        "mrr": 0.9988888888888888,
+        "mean_rank": 1.002857142857143,
+        "mean_target_distance": 0.18206991255283356
+      },
+      "extraction_ms": 4.286850856262303,
+      "retrieval_ms": 2.2294004284776747,
+      "total_latency_ms": 6.516251284739978,
+      "p95": {
+        "shape": 7.197932243347168
+      }
+    },
+    "HOG + Gabor": {
+      "configuration": "HOG + Gabor",
+      "category": "complementarity",
+      "dimensions": 1800,
+      "components": "hog,gabor",
+      "selection": {
+        "hit1": 0.9980952380952381,
+        "hit5": 1.0,
+        "mrr": 0.9990476190476191,
+        "mean_rank": 1.0019047619047619,
+        "mean_target_distance": 0.1317991018295288
+      },
+      "test": {
+        "hit1": 1.0,
+        "hit5": 1.0,
+        "mrr": 1.0,
+        "mean_rank": 1.0,
+        "mean_target_distance": 0.13041779398918152
+      },
+      "extraction_ms": 26.40179619159816,
+      "retrieval_ms": 2.274260380793186,
+      "total_latency_ms": 28.676056572391346,
+      "p95": {
+        "texture": 13.645493507385254,
+        "shape": 7.197932243347168
+      }
+    },
+    "Spatial HSV + Global HSV": {
+      "configuration": "Spatial HSV + Global HSV",
+      "category": "complementarity",
+      "dimensions": 504,
+      "components": "spatial_hsv,global_hsv",
+      "selection": {
+        "hit1": 1.0,
+        "hit5": 1.0,
+        "mrr": 1.0,
+        "mean_rank": 1.0,
+        "mean_target_distance": 0.011672977358102798
+      },
+      "test": {
+        "hit1": 0.9980952380952381,
+        "hit5": 0.9990476190476191,
+        "mrr": 0.9987074829931972,
+        "mean_rank": 1.0066666666666666,
+        "mean_target_distance": 0.01207704283297062
+      },
+      "extraction_ms": 12.842649003446457,
+      "retrieval_ms": 7.482065857121986,
+      "total_latency_ms": 20.32471486056844,
+      "p95": {
+        "color": 0.8932904005050659
+      }
+    },
+    "GLCM + LBP": {
+      "configuration": "GLCM + LBP",
+      "category": "complementarity",
+      "dimensions": 38,
+      "components": "glcm,lbp",
+      "selection": {
+        "hit1": 0.5371428571428571,
+        "hit5": 0.7209523809523809,
+        "mrr": 0.6199839857129551,
+        "mean_rank": 66.3952380952381,
+        "mean_target_distance": 0.11313725262880325
+      },
+      "test": {
+        "hit1": 0.5561904761904762,
+        "hit5": 0.7285714285714285,
+        "mrr": 0.6319457466608683,
+        "mean_rank": 72.47904761904762,
+        "mean_target_distance": 0.11942853778600693
+      },
+      "extraction_ms": 106.656618475404,
+      "retrieval_ms": 0.47194557131401127,
+      "total_latency_ms": 107.12856404671801,
+      "p95": {
+        "texture": 5.951282024383545
+      }
+    },
+    "HOG + Silhouette": {
+      "configuration": "HOG + Silhouette",
+      "category": "complementarity",
+      "dimensions": 1828,
+      "components": "hog,silhouette",
+      "selection": {
+        "hit1": 0.9980952380952381,
+        "hit5": 1.0,
+        "mrr": 0.9990476190476191,
+        "mean_rank": 1.0019047619047619,
+        "mean_target_distance": 0.14078651368618011
+      },
+      "test": {
+        "hit1": 1.0,
+        "hit5": 1.0,
+        "mrr": 1.0,
+        "mean_rank": 1.0,
+        "mean_target_distance": 0.14056234061717987
+      },
+      "extraction_ms": 5.960394808401664,
+      "retrieval_ms": 2.3534104285673014,
+      "total_latency_ms": 8.313805236968966,
+      "p95": {
+        "shape": 5.188645839691162
+      }
+    },
+    "Full - LBP - Silhouette": {
+      "configuration": "Full - LBP - Silhouette",
+      "category": "reduced",
+      "dimensions": 2319,
+      "components": "global_hsv,spatial_hsv,glcm,gabor,scalar,hog",
+      "selection": {
+        "hit1": 0.9990476190476191,
+        "hit5": 1.0,
+        "mrr": 0.9995238095238095,
+        "mean_rank": 1.000952380952381,
+        "mean_target_distance": 0.09296657145023346
+      },
+      "test": {
+        "hit1": 0.9990476190476191,
+        "hit5": 1.0,
+        "mrr": 0.9995238095238095,
+        "mean_rank": 1.000952380952381,
+        "mean_target_distance": 0.09278661757707596
+      },
+      "extraction_ms": 52.88882647973618,
+      "retrieval_ms": 9.82096942840144,
+      "total_latency_ms": 62.70979590813762,
+      "p95": {
+        "color": 0.8932904005050659,
+        "texture": 10.821836471557617,
+        "shape": 6.61055850982666
+      }
+    },
+    "Full - LBP - Silhouette - Global HSV": {
+      "configuration": "Full - LBP - Silhouette - Global HSV",
+      "category": "reduced",
+      "dimensions": 2031,
+      "components": "spatial_hsv,glcm,gabor,scalar,hog",
+      "selection": {
+        "hit1": 0.9990476190476191,
+        "hit5": 1.0,
+        "mrr": 0.9995238095238095,
+        "mean_rank": 1.000952380952381,
+        "mean_target_distance": 0.09266036003828049
+      },
+      "test": {
+        "hit1": 0.9990476190476191,
+        "hit5": 1.0,
+        "mrr": 0.9995238095238095,
+        "mean_rank": 1.000952380952381,
+        "mean_target_distance": 0.0924752801656723
+      },
+      "extraction_ms": 47.575260050528286,
+      "retrieval_ms": 5.5571046664512584,
+      "total_latency_ms": 53.132364716979545,
+      "p95": {
+        "color": 0.8848211765289307,
+        "texture": 10.821836471557617,
+        "shape": 6.61055850982666
+      }
+    },
+    "Full - LBP - Silhouette - GLCM": {
+      "configuration": "Full - LBP - Silhouette - GLCM",
+      "category": "reduced",
+      "dimensions": 2309,
+      "components": "global_hsv,spatial_hsv,gabor,scalar,hog",
+      "selection": {
+        "hit1": 0.9990476190476191,
+        "hit5": 1.0,
+        "mrr": 0.9995238095238095,
+        "mean_rank": 1.000952380952381,
+        "mean_target_distance": 0.08781316876411438
+      },
+      "test": {
+        "hit1": 1.0,
+        "hit5": 1.0,
+        "mrr": 1.0,
+        "mean_rank": 1.0,
+        "mean_target_distance": 0.08702389150857925
+      },
+      "extraction_ms": 43.460064480923826,
+      "retrieval_ms": 9.774052190283934,
+      "total_latency_ms": 53.23411667120776,
+      "p95": {
+        "color": 0.8932904005050659,
+        "texture": 13.645493507385254,
+        "shape": 6.61055850982666
+      }
+    },
+    "Full - LBP - Silhouette - Shape Scalar": {
+      "configuration": "Full - LBP - Silhouette - Shape Scalar",
+      "category": "reduced",
+      "dimensions": 2314,
+      "components": "global_hsv,spatial_hsv,glcm,gabor,hog",
+      "selection": {
+        "hit1": 0.9990476190476191,
+        "hit5": 1.0,
+        "mrr": 0.9995238095238095,
+        "mean_rank": 1.000952380952381,
+        "mean_target_distance": 0.10091467201709747
+      },
+      "test": {
+        "hit1": 0.9990476190476191,
+        "hit5": 1.0,
+        "mrr": 0.9995238095238095,
+        "mean_rank": 1.000952380952381,
+        "mean_target_distance": 0.10067829489707947
+      },
+      "extraction_ms": 48.67320719385697,
+      "retrieval_ms": 9.810079714128127,
+      "total_latency_ms": 58.4832869079851,
+      "p95": {
+        "color": 0.8932904005050659,
+        "texture": 10.821836471557617,
+        "shape": 7.197932243347168
+      }
+    },
+    "Full silhouette=0.1": {
+      "configuration": "Full silhouette=0.1",
+      "category": "silhouette_weight",
+      "dimensions": 2411,
+      "components": "global_hsv,spatial_hsv,lbp,glcm,gabor,silhouette,scalar,hog",
+      "selection": {
+        "hit1": 0.9990476190476191,
+        "hit5": 1.0,
+        "mrr": 0.9995238095238095,
+        "mean_rank": 1.000952380952381,
+        "mean_target_distance": 0.08982233703136444
+      },
+      "test": {
+        "hit1": 0.9990476190476191,
+        "hit5": 1.0,
+        "mrr": 0.9995238095238095,
+        "mean_rank": 1.000952380952381,
+        "mean_target_distance": 0.08965680748224258
+      },
+      "extraction_ms": 151.7902269084672,
+      "retrieval_ms": 10.345680094989282,
+      "total_latency_ms": 162.13590700345648,
+      "p95": {
+        "color": 0.8932904005050659,
+        "texture": 9.745675086975098,
+        "shape": 6.20157527923584
+      }
+    },
+    "Full silhouette=0.2": {
+      "configuration": "Full silhouette=0.2",
+      "category": "silhouette_weight",
+      "dimensions": 2411,
+      "components": "global_hsv,spatial_hsv,lbp,glcm,gabor,silhouette,scalar,hog",
+      "selection": {
+        "hit1": 0.9990476190476191,
+        "hit5": 1.0,
+        "mrr": 0.9995238095238095,
+        "mean_rank": 1.000952380952381,
+        "mean_target_distance": 0.08608181029558182
+      },
+      "test": {
+        "hit1": 0.9990476190476191,
+        "hit5": 1.0,
+        "mrr": 0.9995238095238095,
+        "mean_rank": 1.000952380952381,
+        "mean_target_distance": 0.0859312191605568
+      },
+      "extraction_ms": 151.7902269084672,
+      "retrieval_ms": 10.35040714256909,
+      "total_latency_ms": 162.14063405103627,
+      "p95": {
+        "color": 0.8932904005050659,
+        "texture": 9.745675086975098,
+        "shape": 5.79824686050415
+      }
+    },
+    "Full silhouette=0.3": {
+      "configuration": "Full silhouette=0.3",
+      "category": "silhouette_weight",
+      "dimensions": 2411,
+      "components": "global_hsv,spatial_hsv,lbp,glcm,gabor,silhouette,scalar,hog",
+      "selection": {
+        "hit1": 0.9990476190476191,
+        "hit5": 1.0,
+        "mrr": 0.9995238095238095,
+        "mean_rank": 1.000952380952381,
+        "mean_target_distance": 0.08169624954462051
+      },
+      "test": {
+        "hit1": 0.9990476190476191,
+        "hit5": 1.0,
+        "mrr": 0.9995238095238095,
+        "mean_rank": 1.000952380952381,
+        "mean_target_distance": 0.08156289160251617
+      },
+      "extraction_ms": 151.7902269084672,
+      "retrieval_ms": 10.370259714046759,
+      "total_latency_ms": 162.16048662251396,
+      "p95": {
+        "color": 0.8932904005050659,
+        "texture": 9.745675086975098,
+        "shape": 5.403536319732666
+      }
+    }
+  },
+  "decisions": [
+    {
+      "feature": "global_hsv",
+      "status": "NEEDS_MORE_TESTING",
+      "delta_hit1": 0.0,
+      "delta_mrr": 0.0,
+      "reason": "Recovery is saturated; neutral removal shows redundancy, not visual uselessness."
+    },
+    {
+      "feature": "spatial_hsv",
+      "status": "NEEDS_MORE_TESTING",
+      "delta_hit1": 0.0,
+      "delta_mrr": 0.0,
+      "reason": "Recovery is saturated; neutral removal shows redundancy, not visual uselessness."
+    },
+    {
+      "feature": "lbp",
+      "status": "REMOVE",
+      "delta_hit1": 0.0,
+      "delta_mrr": 0.0,
+      "reason": "Weak alone, expensive to extract, and removal is neutral on both splits."
+    },
+    {
+      "feature": "glcm",
+      "status": "REMOVE",
+      "delta_hit1": -0.0009523809523809268,
+      "delta_mrr": -0.0004761904761905189,
+      "reason": "Weak alone and removal is neutral on selection while slightly better on test."
+    },
+    {
+      "feature": "gabor",
+      "status": "NEEDS_MORE_TESTING",
+      "delta_hit1": 0.003809523809523818,
+      "delta_mrr": 0.002867724867724908,
+      "reason": "Effect is small or inconsistent across selection and test."
+    },
+    {
+      "feature": "silhouette",
+      "status": "NEEDS_MORE_TESTING",
+      "delta_hit1": 0.0,
+      "delta_mrr": 0.0,
+      "reason": "Baseline weight is zero; use explicit silhouette-weight trials."
+    },
+    {
+      "feature": "scalar",
+      "status": "NEEDS_MORE_TESTING",
+      "delta_hit1": 0.0,
+      "delta_mrr": 0.0,
+      "reason": "Recovery is saturated; neutral removal shows redundancy, not visual uselessness."
+    },
+    {
+      "feature": "hog",
+      "status": "NEEDS_MORE_TESTING",
+      "delta_hit1": 0.0,
+      "delta_mrr": 0.0,
+      "reason": "Recovery is saturated; neutral removal shows redundancy, not visual uselessness."
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+﻿feature,dimensions,gallery_extraction_ms_mean,query_extraction_ms_mean,distance_ms_per_query
+spatial_ms_lbp,162,161.3375305144842,160.12538583017886,3.0913500001631853
+hu,7,0.6083309228851762,0.651137972904724,0.013274404807903227

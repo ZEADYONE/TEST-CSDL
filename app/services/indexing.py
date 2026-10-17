@@ -13,16 +13,14 @@ from tqdm import tqdm
 
 from app.config import Settings, get_settings
 from app.models import ImageFeature, ImageRecord
-from app.services.feature_extractor import BirdFeatureExtractor, FeatureBundle
-from app.services.normalization import FeatureNormalizers
+from app.services.feature_extractor import FeatureBundle
+from app.services.pipeline import BirdCBIRPipeline
 from app.services.preprocessing import (
     YoloBirdSegmenter,
     load_image,
-    preprocess_array,
     rgba_image,
     write_image,
 )
-from app.services.similarity import fit_distance_scaling
 
 
 LOGGER = logging.getLogger(__name__)
@@ -81,8 +79,8 @@ def index_dataset(
     config = settings or get_settings()
     config.ensure_directories()
     files = collect_images(roots)
-    extractor = BirdFeatureExtractor()
     segmenter = None if already_preprocessed else YoloBirdSegmenter(config)
+    pipeline = BirdCBIRPipeline(config, segmenter=segmenter)
     pending: list[PendingImage] = []
     failures = 0
 
@@ -90,13 +88,11 @@ def index_dataset(
         try:
             raw = load_image(source)
             original_height, original_width = raw.shape[:2]
-            processed = preprocess_array(
+            extracted = pipeline.process(
                 raw,
                 already_preprocessed=already_preprocessed,
-                segmenter=segmenter,
-                settings=config,
             )
-            features = extractor.extract(processed.image, processed.mask)
+            processed = extracted.processed
             output = _processed_path(source, config)
             write_image(output, rgba_image(processed.image, processed.mask))
             pending.append(
@@ -107,7 +103,7 @@ def index_dataset(
                     original_width,
                     original_height,
                     output.resolve(),
-                    features,
+                    extracted.features,
                 )
             )
         except Exception:
@@ -115,17 +111,22 @@ def index_dataset(
             LOGGER.exception("Could not index %s", source)
 
     if len(pending) < 2:
-        raise RuntimeError("Fewer than two valid images remain; indexing cannot fit distance statistics")
-    normalizers = FeatureNormalizers.fit([item.features for item in pending])
-    normalized = [normalizers.transform(item.features) for item in pending]
-    normalizers.save(config.scaler_dir)
-    fit_distance_scaling(normalized, settings=config).save(config.distance_stats_path)
+        raise RuntimeError(
+            "Fewer than two valid images remain; indexing cannot fit distance statistics"
+        )
+    normalized = pipeline.fit_dataset([item.features for item in pending])
 
     existing = {
         record.file_path: record
-        for record in session.scalars(select(ImageRecord).where(ImageRecord.file_path.in_([str(item.source) for item in pending])))
+        for record in session.scalars(
+            select(ImageRecord).where(
+                ImageRecord.file_path.in_([str(item.source) for item in pending])
+            )
+        )
     }
-    for item, bundle in tqdm(list(zip(pending, normalized)), desc="Writing PostgreSQL", unit="image"):
+    for item, bundle in tqdm(
+        list(zip(pending, normalized)), desc="Writing PostgreSQL", unit="image"
+    ):
         key = str(item.source)
         record = existing.get(key)
         if record is None:

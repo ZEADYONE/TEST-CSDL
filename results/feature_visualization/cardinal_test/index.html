@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Handcrafted feature visualization</title>
+  <style>
+    :root { color-scheme: light; --ink:#17231d; --muted:#627068; --line:#d8e0d9; --panel:#f7f9f5; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:Segoe UI,Arial,sans-serif; color:var(--ink); background:#eef2ea; }
+    main { max-width:1440px; margin:auto; padding:28px; }
+    h1 { margin:0 0 8px; } .lead { color:var(--muted); margin:0 0 24px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(330px,1fr)); gap:18px; }
+    .card { background:white; border:1px solid var(--line); border-radius:12px; padding:14px; box-shadow:0 3px 12px #2035250d; }
+    .card h3 { margin:0 0 10px; } .card img { width:100%; height:330px; object-fit:contain; background:var(--panel); border-radius:8px; }
+    .card p { color:var(--muted); line-height:1.45; margin:10px 0 0; }
+    table { width:100%; border-collapse:collapse; } td,th { padding:9px; border-bottom:1px solid var(--line); text-align:left; }
+    code { background:#e8eee7; padding:2px 5px; border-radius:4px; }
+  </style>
+</head>
+<body><main>
+  <h1>Trực quan pipeline đặc trưng thủ công</h1>
+  <p class="lead">Nguồn: <code>D:\PROJECT\TEST CSDL\app\static\dataset\925f60f0859f58bc_Cardinal_0001_17057.png</code>. Các ảnh màu giả chỉ minh họa đáp ứng; vector tìm kiếm vẫn dùng giá trị số thực từ pipeline.</p>
+  <section class="grid"><article class='card'><h3>Ảnh đầu vào</h3><img src='00_source.png' alt='Ảnh đầu vào'><p>Ảnh được đọc từ tệp trước bước chuẩn hóa.</p></article><article class='card'><h3>Ảnh sau tiền xử lý</h3><img src='01_normalized.png' alt='Ảnh sau tiền xử lý'><p>Chim được crop, giữ tỷ lệ, đưa vào canvas 384×384 và loại nền bằng mask.</p></article><article class='card'><h3>Binary mask</h3><img src='02_mask.png' alt='Binary mask'><p>Vùng trắng là foreground được dùng khi trích xuất mọi đặc trưng.</p></article><article class='card'><h3>Global HSV — 288D</h3><img src='03_global_hsv.png' alt='Global HSV — 288D'><p>Biểu đồ biên theo Hue của histogram HSV toàn bộ con chim; vector thật còn chứa Saturation và Value.</p></article><article class='card'><h3>Spatial HSV — 216D</h3><img src='04_spatial_hsv_regions.png' alt='Spatial HSV — 216D'><p>Ba vùng trái–giữa–phải giữ lại vị trí tương đối của màu trên chim.</p></article><article class='card'><h3>LBP P=8, R=1</h3><img src='05_lbp_r1.png' alt='LBP P=8, R=1'><p>Mã vi kết cấu ở bán kính một pixel; màu chỉ dùng để trực quan hóa mã LBP.</p></article><article class='card'><h3>LBP P=16, R=2</h3><img src='06_lbp_r2.png' alt='LBP P=16, R=2'><p>Mã vi kết cấu ở bán kính hai pixel; hai histogram tạo thành vector LBP 28D.</p></article><article class='card'><h3>GLCM — 10D</h3><img src='07_glcm_matrices.png' alt='GLCM — 10D'><p>Bốn ma trận đồng xuất hiện mức xám; vector lưu mean/std của contrast, energy, homogeneity, correlation và entropy.</p></article><article class='card'><h3>Gabor — 36D</h3><img src='08_gabor_responses.png' alt='Gabor — 36D'><p>18 đáp ứng từ ba bước sóng và sáu hướng; vector lưu mean/std của từng đáp ứng.</p></article><article class='card'><h3>Silhouette — 64D</h3><img src='09_silhouette_grid.png' alt='Silhouette — 64D'><p>Mỗi ô thể hiện tỷ lệ foreground trong một vùng của lưới 8×8.</p></article><article class='card'><h3>HOG — 1764D</h3><img src='10_hog_response.png' alt='HOG — 1764D'><p>Các hướng gradient cục bộ mô tả đường biên, mỏ, cánh, thân và đuôi.</p></article></section>
+  <article class="card" style="margin-top:18px">
+    <h3>Shape Scalar — 5D</h3>
+    <table><thead><tr><th>Thuộc tính</th><th>Giá trị trước StandardScaler</th></tr></thead><tbody><tr><td>Aspect ratio</td><td>0.930233</td></tr><tr><td>Eccentricity</td><td>0.957190</td></tr><tr><td>Circularity</td><td>0.300393</td></tr><tr><td>Solidity</td><td>0.766432</td></tr><tr><td>Extent</td><td>0.272084</td></tr></tbody></table>
+  </article>
+  <article class="card" style="margin-top:18px">
+    <h3>Kích thước vector thực tế</h3>
+    <table><tbody>
+      <tr><td>Global HSV</td><td>288</td></tr>
+      <tr><td>Spatial HSV</td><td>216</td></tr>
+      <tr><td>LBP</td><td>28</td></tr>
+      <tr><td>GLCM</td><td>10</td></tr>
+      <tr><td>Gabor</td><td>36</td></tr>
+      <tr><td>Silhouette</td><td>64</td></tr>
+      <tr><td>Shape Scalar</td><td>5</td></tr>
+      <tr><td>HOG</td><td>1764</td></tr>
+      <tr><th>Tổng</th><th>2411</th></tr>
+    </tbody></table>
+  </article>
+</main></body></html>

@@ -23,7 +23,7 @@ def test_health_and_home_routes():
             health = client.get("/api/health")
             home = client.get("/")
         assert health.status_code == 200
-        assert health.json()["feature_version"] == "v4-color"
+        assert health.json()["feature_version"] == "v5-bbox-shape"
         assert home.status_code == 200
         assert "Bird Image Retrieval" in home.text
         assert "same_species" not in home.text

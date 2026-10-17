@@ -13,22 +13,16 @@ from sqlalchemy.orm import Session, joinedload
 from app.config import Settings, get_settings
 from app.models import ImageFeature, ImageRecord
 from app.schemas.search import SearchDebug, SearchResponse, SearchResult
-from app.services.feature_extractor import BirdFeatureExtractor, FeatureBundle
+from app.services.feature_extractor import FeatureBundle
 from app.services.debug_visualization import save_debug_outputs
-from app.services.normalization import FeatureNormalizers
+from app.services.pipeline import BirdCBIRPipeline
 from app.services.preprocessing import (
     ProcessedBird,
     decode_image,
-    preprocess_array,
     rgba_image,
     write_image,
 )
-from app.services.similarity import (
-    DistanceScaling,
-    component_distances,
-    effective_weights,
-    similarities,
-)
+from app.services.similarity import effective_weights
 
 
 def _save_query_artifacts(
@@ -68,16 +62,14 @@ def search_similar_images(
     config = settings or get_settings()
     config.ensure_directories()
     raw = decode_image(image_data)
-    processed = preprocess_array(
+    pipeline = BirdCBIRPipeline.from_saved_artifacts(config)
+    extracted = pipeline.process(
         raw,
         already_preprocessed=False,
         flip_horizontal=flip_horizontal,
-        settings=config,
     )
-    raw_bundle = BirdFeatureExtractor().extract(processed.image, processed.mask)
-    query = FeatureNormalizers.load(config.scaler_dir).transform(raw_bundle)
-    scaling = DistanceScaling.load(config.distance_stats_path)
-    weights = effective_weights(processed.quality.quality_score, config)
+    processed = extracted.processed
+    query = pipeline.normalize(extracted.features)
 
     records = session.scalars(
         select(ImageRecord)
@@ -87,31 +79,43 @@ def search_similar_images(
     ).all()
     if not records:
         raise LookupError("The database has no indexed images")
-    ranked: list[SearchResult] = []
+    candidates: list[FeatureBundle] = []
     for record in records:
         feature = record.feature
-        candidate = FeatureBundle(
-            np.asarray(feature.color_vector, dtype=np.float32),
-            np.asarray(feature.texture_vector, dtype=np.float32),
-            np.asarray(feature.shape_vector, dtype=np.float32),
-        ).validate()
-        scores = similarities(component_distances(query, candidate, config), scaling, weights)
+        candidates.append(
+            FeatureBundle(
+                np.asarray(feature.color_vector, dtype=np.float32),
+                np.asarray(feature.texture_vector, dtype=np.float32),
+                np.asarray(feature.shape_vector, dtype=np.float32),
+            ).validate()
+        )
+    matches = pipeline.rank(
+        query,
+        candidates,
+        mask_quality=processed.quality.quality_score,
+        top_k=top_k,
+    )
+    ranked: list[SearchResult] = []
+    for match in matches:
+        record = records[match.candidate_index]
         ranked.append(
             SearchResult(
                 image_id=record.id,
                 file_name=record.file_name,
                 species=record.species,
                 image_url=f"/api/images/{record.id}",
-                similarity=scores[0],
-                color_similarity=scores[1],
-                texture_similarity=scores[2],
-                shape_similarity=scores[3],
+                similarity=match.similarity,
+                color_similarity=match.color_similarity,
+                texture_similarity=match.texture_similarity,
+                shape_similarity=match.shape_similarity,
             )
         )
-    ranked.sort(key=lambda item: item.similarity, reverse=True)
     urls = _save_query_artifacts(raw, processed, config)
     debug = (
-        SearchDebug(mask_quality=processed.quality.quality_score, effective_weights=weights)
+        SearchDebug(
+            mask_quality=processed.quality.quality_score,
+            effective_weights=effective_weights(processed.quality.quality_score, config),
+        )
         if config.debug_features
         else None
     )
@@ -120,6 +124,6 @@ def search_similar_images(
         query_processed_url=urls[1],
         query_mask_url=urls[2],
         mask_quality=processed.quality.quality_score,
-        results=ranked[:top_k],
+        results=ranked,
         debug=debug,
     )

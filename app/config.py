@@ -25,7 +25,7 @@ class Settings(BaseSettings):
 
     app_name: str = "Bird Image Retrieval"
     database_url: str = "postgresql+psycopg://postgres:password@localhost:5432/bird_cbir"
-    yolo_model: Path = PROJECT_ROOT / "models" / "yolo11n-seg.pt"
+    yolo_model: Path = PROJECT_ROOT / "models" / "yolo11l-seg.pt"
     target_size: int = 384
     mask_min_ratio: float = 0.01
     mask_min_dimension: int = 8
@@ -35,16 +35,15 @@ class Settings(BaseSettings):
     yolo_confidence: float = 0.05
     orientation_mode: str = "none"
     debug_features: bool = False
-    feature_version: str = "v4-color"
+    feature_version: str = "v5-bbox-shape"
 
     color_joint_weight: float = 0.30
     color_spatial_weight: float = 0.70
     texture_lbp_weight: float = 0.10
     texture_glcm_weight: float = 0.30
     texture_gabor_weight: float = 0.60
-    shape_silhouette_weight: float = 0.00
-    shape_scalar_weight: float = 0.20
-    shape_hog_weight: float = 0.80
+    shape_silhouette_weight: float = 0.80
+    shape_hog_weight: float = 0.20
     weight_color: float = 0.30
     weight_texture: float = 0.30
     weight_shape: float = 0.40
@@ -100,7 +99,6 @@ class Settings(BaseSettings):
             raise ValueError("texture sub-weights must sum to 1")
         if abs(
             self.shape_silhouette_weight
-            + self.shape_scalar_weight
             + self.shape_hog_weight
             - 1.0
         ) > 1e-6:
